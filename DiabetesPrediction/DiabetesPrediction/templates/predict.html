@@ -1,0 +1,377 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>diabetic </title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="style.css">
+
+      {% load bootstrap5 %}
+      <link rel="stylesheet" type="text/css" href="http://bootwatch.com/5/simplex/bootstrap.min.css"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+      {% bootstrap_css %}
+      {% bootstrap_javascript %}
+
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-2yU5aDhNN3W6vQVF0OfGIt5g5fPSdQVqNfByTzB0KJyvzF8kL/m9c/dUiq9OvQhN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+
+     .main{
+            position: fixed;
+            top: 40px;
+            left: 350px;
+            width: 900px;
+            background-color:#ffffff;
+            border-radius: 10px;
+            align-items: center;
+            padding: 5%;
+        }
+        h1{
+            color: #0086b3;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        input[type=submit]{
+            background-color: #4dc3ff;
+            border: 5px;
+            color: white;
+            padding: 9px 19px;
+            cursor: pointer;
+            margin-top: 17px;
+        }
+
+        body{
+                 font-family: 'Poppins', sans-serif;
+            }
+        .nav-item a{
+            font-size: 16px;
+             line-height: 24px;
+            color: #000000;
+             }
+        .sec-padding{
+            padding-bottom: 80px;
+        }
+        .fixed-top{
+            background: #F0FFF0;
+        }
+        .nav-item{
+            padding: 0px 5px;
+        }
+        .nav-btn{
+            padding: 10px 28px !important;
+            background-color: #21B573;
+            color: #ffffff !important;
+            border: none;
+            border-radius: 33px;
+        }
+          /* Footer section */
+        .footer-section{
+            padding-top: 55px;
+            background: #282531;
+            color: #FFFFFF;
+            margin-top: 278px;
+            position: relative;
+        }
+        .footer-p p{
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 30px;
+        }
+        .footer-inner{
+            padding-bottom: 75px;
+        }
+        .footer-list-item ul li{
+            font-size: 16px;
+            line-height: 30px;
+            margin-bottom: 5px;
+        }
+        .footer-list-item ul li:nth-child(1){
+            font-weight: bold;
+        }
+        .footer-list-item a{
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        small{
+            font-size: 16px;
+            line-height: 30px;
+            color: #CDCDCD;
+        }
+          h1 {
+        font-size: 36px;
+        color: #333;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    </style>
+</head>
+
+<body>
+ <!--
+    ===================
+        NAVIGATION
+    ===================
+    -->
+
+
+    <header class="nav-scroll fixed-top mh-xss-mobile-nav">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#">
+                    <img src="{% static 'DiabetesPrediction/images/dia.svg'  %}" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                         <li class="nav-item active">
+                            <a class="nav-link" href="/font.html/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/predict.html/" >Predict</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ads.html/">Advertisment</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact.html/">Contact us</a>
+                        </li>
+                         <li class="nav-item">
+                              <!-- Logout button form -->
+                              <form action="{% url 'logout' %}" method="post">
+                                  {% csrf_token %}
+                               <button type="submit" class="nav-link btn btn-link">Logout</button>
+                             </form>
+                         </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+ </br></br>
+ </br></br>
+ </br></br>
+  <div class="container2">
+    <div align='center' class="main">
+        <h1 id="changing-heading" >Please enter the following information:</h1>
+      <form action="result" method="POST" name="myForm" onsubmit="return validateForm();">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td align="right"> Pregnancies(<i class="fa fa-wheelchair"></i>):-</td>
+                <td align="left"><input type="text" name="n1"></td>
+            </tr>
+            <tr>
+                <td align="right"> Glucose(<i class="fa fa-envelope"></i>):-</td>
+                <td align="left"><input type="text" name="n2"></td>
+            </tr>
+            <tr>
+                <td align="right"> Blood pressure(<i class="fa fa-thermometer-full"></i>):-</td>
+                <td align="left"><input type="text" name="n3"></td>
+            </tr>
+            <tr>
+                <td align="right"> Skin Thickness(<i class="fa fa-user"></i>):-</td>
+                <td align="left"><input type="text" name="n4"></td>
+            </tr>
+            <tr>
+                <td align="right"> Insulin(<i class="fa fa-paint-brush"></i>):-</td>
+                <td align="left"><input type="text" name="n5"></td>
+            </tr>
+            <tr>
+                <td align="right">BMI(<i class="fa fa-plus-circle"></i> ):-</td>
+                <td align="left"><input type="text" name="n6"></td>
+            </tr>
+            <tr>
+                <td align="right"> Diabetes Pedigree Function(<i class="fa fa-user"></i>):-</td>
+                <td align="left"><input type="text" name="n7"></td>
+            </tr>
+            <tr>
+                <td align="right"> Age(<i class="fa fa-calendar"></i>):-</td>
+                <td align="left"><input type="text" name="n8"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+        Result:{{result2}}
+    </div>
+    </div>
+   </br>
+ </br>
+ </br>
+ </br>
+ </br>
+ </br>
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-p">
+                        <p>Millions of people of all ages and from around
+                            the world are improving their lives with us</p>
+                    </div>
+                </div>
+                <div class="col-md-7 ml-auto">
+                    <div class="footer-inner d-flex justify-content-between">
+                        <div class="footer-list-item">
+                            <ul class="list-unstyled">
+                                <li>Dabetic Types</li>
+                                <li><a href="#">Type 1 diabetes</a></li>
+                                <li><a href="#">Type 2 diabetes.</a></li>
+                                <li><a href="#">Gestational diabetes</a></li>
+                                <li><a href="#">Neonatal diabetes</a></li>
+                                <li><a href="#">Wolfram Syndrome</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-list-item">
+                            <ul class="list-unstyled">
+                                <li>diabetic diet food list</li>
+                                <li><a href="#">vegetables</a></li>
+                                <li><a href="#">fruits</a></li>
+                                <li><a href="#">grains</a></li>
+                                <li><a href="#">protein</a></li>
+                                <li><a href="#">dairy</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-list-item">
+                            <ul class="list-unstyled">
+                                <li>diabetes symptoms</li>
+                                <li><a href="#">Urinating often</a></li>
+                                <li><a href="#">Feeling tired and weak</a></li>
+                                <li><a href="#">Having blurry vision</a></li>
+                                <li><a href="#">Having slow-healing sores</a></li>
+                                <li><a href="#">Having blurry vision.</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <small>Copyright © 2024 M.M.kadampan</small>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script>
+    // Function to generate a random color
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Function to change heading color periodically
+    function changeHeadingColor() {
+        var heading = document.getElementById('changing-heading');
+        heading.style.color = getRandomColor();
+    }
+
+    // Change heading color every 3 seconds
+    setInterval(changeHeadingColor, 3000);
+
+    function validateForm() {
+        var n1 = document.forms["myForm"]["n1"].value;
+        var n2 = document.forms["myForm"]["n2"].value;
+        var n3 = document.forms["myForm"]["n3"].value;
+        var n4 = document.forms["myForm"]["n4"].value;
+        var n5 = document.forms["myForm"]["n5"].value;
+        var n6 = document.forms["myForm"]["n6"].value;
+        var n7 = document.forms["myForm"]["n7"].value;
+        var n8 = document.forms["myForm"]["n8"].value;
+
+         if (n1 == "" && n2 == "" && n3 == "" && n4 == "" && n5 == "" && n6 == "" && n7 == "" && n8 == ""  ) {
+            alert("All value is empty");
+            return false;
+        }
+        else if (n1 == "" ) {
+            alert("Pregnancies value is empty");
+            return false;
+        }
+        else if(n2== "" ){
+            alert(" Glucose value is empty");
+            return false;
+        }
+
+         else if(n3== "" ){
+            alert("Blood presure value is empty");
+            return false;
+        }
+         else if(n4== "" ){
+            alert("Skin Thickness value is empty");
+            return false;
+        }
+         else if(n5== "" ){
+            alert("Insuline value is empty");
+            return false;
+        }
+         else if(n6== "" ){
+            alert("BMI value is empty");
+            return false;
+        }
+         else if(n7== "" ){
+            alert("Diabetes pedigree function value is empty");
+            return false;
+        }
+         else if(n8== "" ){
+            alert("Age value is empty");
+            return false;
+        }
+         else if (isNaN(n1) && isNaN(n2) && isNaN(n3) && isNaN(n4) && isNaN(n5) && isNaN(n6) && isNaN(n7) && isNaN(n8)) {
+               alert("All the values are text. please change number value only ");
+                return false;
+            }
+         else if (isNaN(n1) ) {
+               alert("you enter text value but Pregnancies value is  numbers only.");
+                return false;
+            }
+
+          else if (isNaN(n2) ) {
+               alert("you enter text value but Glucose value is  numbers only.");
+                return false;
+            }
+          else if (isNaN(n3) ) {
+               alert("you enter text value but Blood presure value is  numbers only.");
+                return false;
+            }
+           else if (isNaN(n4) ) {
+               alert("you enter text value but Skin Thickness value is  numbers only.");
+                return false;
+            }
+
+           else if (isNaN(n5) ) {
+               alert("you enter text value but Insulin value is  numbers only.");
+                return false;
+            }
+           else if (isNaN(n6) ) {
+               alert("you enter text value but BMI value is  numbers only.");
+                return false;
+            }
+           else if (isNaN(n7) ) {
+               alert("you enter text value but Diabetes pedigree function value is  numbers only.");
+                return false;
+            }
+           else if (isNaN(n8) ) {
+               alert("you enter text value but Age value is  numbers only.");
+                return false;
+            }
+    }
+</script>
+
+</body>
+</html>
